@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cloudinary-jquery@2.11.3/cloudinary-jquery.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"> </script>
+
+    <title>Sushi Thread</title>
+    <% if (locals.scripts) { %> 
+        <% for(var i=0; i<scripts.length; i++) { %>
+            <script src="<%= scripts[i]%>"></script>
+        <% } %> 
+    <% } %> 
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+</head>
+<body style="margin: 0px;">
+
+<header>
+    <div class="navbar">
+
+       <img src="/images/sushi_thread.png" alt="logo" class="logo">
+
+
+
+       
+
+        <nav>
+            <ul>
+                <li>
+                    <form action="/home" method="get">
+                        <button class="btn-logout">Home</button>
+                    </form>
+                </li>
+                <li><form action="/profile" method="get">
+                    <button class="btn-logout">My Profile</button>
+                </form></li>
+                <li>
+                    <% if (auth) { %>
+                        <form action='/logout' method='post'>
+                            <button class="btn-logout">Log out</button>
+                        </form>
+                    <% } else { %>
+                        <form action='/signup' method='get'>
+                            <button class="btn-logout">Sign up</button>
+                        </form>
+                    <% } %>
+                    
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

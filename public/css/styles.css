@@ -1,0 +1,438 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* index.js */
+.index-page {
+    margin-top: 20%;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.index-logo {
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+} 
+
+.index-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.index-btn button {
+    margin: 10px;
+}
+
+/* landing_login.ejs, signup.ejs  */
+.panel-info {
+    width: 400px;
+    height: auto;
+    border: 2px solid #caf0f8; 
+    border-radius: 5px;
+    background-color: white;
+}
+
+.panel-heading {
+    background-color: #caf0f8; 
+    padding: 7px; 
+    opacity: 75%;
+}
+
+.panel-title {
+    padding-left: 10px; 
+    color: #023e8a;
+}
+
+.panel-signin {
+    float: right; 
+    font-size: 85%; 
+    position: relative; 
+    top:-10px;
+}
+
+.btn-signup {
+    margin-left: 15px; 
+    margin-bottom: 15px; 
+    background-color: #0077b6; 
+    color: white; 
+    cursor: pointer; 
+    border: none; 
+    text-decoration: none; 
+    padding: 5px 12px; 
+    border-radius: 3px;
+}
+
+.form-control {
+    width: 90%; 
+    margin: auto; 
+    display: block;
+}
+
+.btn-login {
+    margin-left: 15px; 
+    background-color: #4CAF50; 
+    color: white; 
+    cursor: pointer; 
+    border: none; 
+    text-decoration: none; 
+    padding: 5px 12px; 
+    border-radius: 3px;
+}
+
+/* header.ejs */
+.navbar {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.logo {
+    float: left;
+    padding: 10px 0;
+    height: 60px;
+    width: 235px;
+    border-radius: 10px;
+}
+
+header {
+    background: #778da9;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+nav {
+    float: right;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 60px;
+    padding-top: 30px;
+
+    position: relative;
+}
+
+.btn-logout {
+    color: #444;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav button::before {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 100%;
+    background-color: #444;
+
+    position: absolute;
+    top: 0;
+    width: 0%;
+
+    transition: all ease-in-out 250ms;
+}
+
+nav button:hover::before  {
+    width: 100%;
+}
+
+.btn-logout:hover {
+    color: #000;
+}
+
+/* home.js */
+.option-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btns button {
+    width: 60px;
+    margin: 10px;
+    padding: 5px;
+    background-color: #3a5a40; 
+    color: white; 
+    cursor: pointer; 
+    border: none; 
+    text-decoration: none; 
+    border-radius: 3px;
+}
+
+.action-btns form {
+    display: inline;
+}
+
+.action-btns button:hover {
+    background-color: #344e41;
+}
+
+/* table for upload info */
+.home-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-info table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-info table th, .table-info table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table-info table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-info table tr:hover {
+    background-color: #ddd;
+}
+
+.table-info table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ccc5b9;
+  color: #252422;
+}
+
+.content {
+    max-width: 450px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/* table for upload info */
+
+.home-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* profile.ejs */
+.user-info {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+}
+
+.user-info button:hover {
+    opacity: 0.7;
+}
+
+.user-info h1 {
+    margin: 0;
+    margin-bottom: 7px;
+}
+
+.profile-divider {
+    border-top: 1px solid#888; 
+    margin-top: 10px; 
+    width: 75%;
+    margin-left: 13%;
+}
+
+.upload-btn button {
+    width: 180px;
+    margin: 10px;
+    padding: 5px;
+    background-color: #5a3a3a; 
+    color: white; 
+    cursor: pointer; 
+    border: none; 
+    text-decoration: none; 
+    border-radius: 3px;
+}
+
+.upload-btn button:hover {
+    background-color: #4e3434;
+}
+
+/* upload an image for pfp */
+.image {
+    padding-top: 7px;
+    margin-top: 7px;
+}
+
+.image img {
+    border-radius: 50%;
+}
+
+.explore-btn button {
+    width: 180px;
+    margin: 10px;
+    padding: 5px;
+    background-color: #5a3a3a; 
+    color: white; 
+    cursor: pointer; 
+    border: none; 
+    text-decoration: none; 
+    border-radius: 3px;
+}
+
+.info-box {
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* home search bar */
+#searchbar{ 
+    margin-left: 34%; 
+    padding:15px; 
+    border-radius: 10px; 
+} 
+
+input[type=text] { 
+     width: 30%; 
+     -webkit-transition: width 0.15s ease-in-out; 
+     transition: width 0.15s ease-in-out; 
+} 
+
+/* thread */
+.thread-post {
+    border: dotted black 1px;
+    width: 75%;
+    margin-left: 12.4%;
+    padding: 10px;
+    margin-top: 13px;
+}
+
+.thread-options {
+    margin-left: 13%;
+}
+
+.text {
+    margin-left: 12%;
+    padding: 10px;
+}
+
+#thread_comment {
+    width: 50px;
+    height: 5px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 5pxpx;
+}
+
+/* thread_comments */
+.parent-child {
+    border: solid 1px black;
+    width: 1427px;
+    max-width: 100%;
+    margin: 21px auto;
+    padding: 0 30px;
+    background-color: #fff;
+}
+
+.comment {
+    position: relative;
+    margin: 20px auto;
+}
+.comment-heading {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 14px;
+}
+.comment-voting {
+    width: 45px;
+    height: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+.comment-voting button {
+    display: block;
+    width: 100%;
+    height: 50%;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+}
+.comment-info {
+    color: rgba(0, 0, 0, 0.5);
+    margin-left: 10px;
+}
+.comment-author {
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: bold;
+    text-decoration: none;
+    display: inline;
+}
+.comment-author:hover {
+    text-decoration: underline;
+}
+
+.comment-body a {
+    display: block;
+    width: 50px;
+    height: 15px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 15px;
+}
+
+.image-comment {
+    display: inline;
+}
+
+.image-comment img {
+    border-radius: 50%;
+}
+
+/* upload a thread */
+.thread-info input {
+    display: block;
+    margin-bottom: 7px;
+}
+
+/* edit a thread */
+.comment-edit {
+    width: 45px;
+    height: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+.comment-edit button {
+    display: block;
+    width: 100%;
+    height: 50%;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+}

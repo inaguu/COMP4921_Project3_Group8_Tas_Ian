@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi Thread</title>
+    <% if (locals.scripts) { %> 
+        <% for(var i=0; i<scripts.length; i++) { %>
+            <script src="<%= scripts[i]%>"></script>
+        <% } %> 
+    <% } %> 
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+</head>
+<body style="margin: 0px; background-color: #1b263b;">
+
+<div class="container">   
+    <div class="info-box">                   
+        <div class="panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Sign In</div>
+            </div>    
+            <div class="panel-body" style="padding-top:20px" >
+                <form method="post" action="/loggingin">
+                    <div style="margin-bottom: 15px" class="input-group">
+                        <input id="login-email" type="email" class="form-control" name="email" placeholder="email" required pattern=".{,100}"
+                        title="Required field">
+                    </div>
+                    <div style="margin-bottom: 15px" class="input-group">
+                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required pattern="(?=.*[\#\+\*\?\^\$\\\.\[\]\{\}\(\)\|\/])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
+                        title="Password must contain at least one number, one symbol, one uppercase and lowercase letter, and at least 10 or more characters">
+                    </div>
+
+                    <div class="btn" style="margin-top:15px">						
+                        <button class="btn-login" type="submit">Login</button>
+                    </div>
+                    <div class="info" style="padding: 15px;">
+                        <div class="info-redirect" style="border-top: 1px solid#888; padding-top: 10px; font-size:85%" >
+                            Don't have an account!
+                            <a href="/signup">Sign Up Here</a>
+                        </div>
+                    </div>   
+                </form>
+            </div>                    
+        </div> 
+        <div class="option-btns">
+            <div class="explore-btn">
+                <form action="/home" method="get">
+                    <button>Explore</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('templates/footer'); -%>

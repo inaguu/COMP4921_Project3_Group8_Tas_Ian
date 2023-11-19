@@ -1,0 +1,20 @@
+{
+  "name": "comp4921_project3_group8_tas_ian",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inaguu/COMP4921_Project3_Group8_Tas_Ian.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inaguu/COMP4921_Project3_Group8_Tas_Ian/issues"
+  },
+  "homepage": "https://github.com/inaguu/COMP4921_Project3_Group8_Tas_Ian#readme"
+}
