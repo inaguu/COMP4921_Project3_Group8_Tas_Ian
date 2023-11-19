@@ -9,12 +9,9 @@ const saltRounds = 12;
 
 const database = include("database_connection");
 const db_utils = include("database/db_utils");
-const db_tables = include("database/create_table");
 const db_users = include("database/users");
-const db_image = include("database/image");
-const db_thread = include("database/thread");
-const db_comment = include("database/comment");
-const url = include("public/js/url");
+// const db_image = include("database/image");
+// const url = include("public/js/url");
 const success = db_utils.printMySQLVersion();
 
 const base_url = "http://localhost:8080";
@@ -39,13 +36,13 @@ app.use(
 	})
 );
 
-//!! Need to include both MongoDB accounts? !!
 var mongoStore = MongoStore.create({
 	mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_host}/?retryWrites=true&w=majority`,
 	crypto: {
 		secret: mongodb_session_secret,
 	},
 });
+
 app.use(
 	session({
 		secret: node_session_secret,
@@ -152,8 +149,48 @@ app.post("/loggingin", async (req, res) => {
 	}
 });
 
+//does not require session auth - public
+app.get("/home", async (req, res) => {
+	res.render("home", {
+		auth: req.session.authenticated,
+	});
+});
+
 app.post("/logout", (req, res) => {
 	req.session.authenticated = false;
 	req.session.destroy();
 	res.redirect("/");
+});
+
+function isValidSession(req) {
+	if (req.session.authenticated) {
+		return true;
+	}
+	return false;
+}
+
+function sessionValidation(req, res, next) {
+	if (!isValidSession(req)) {
+		req.session.destroy();
+		res.redirect("/");
+		return;
+	} else {
+		next();
+	}
+}
+
+// app.use("/profile", sessionValidation);
+
+app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
+
+app.get("*", (req, res) => {
+	res.status(404);
+	res.render("404", {
+		auth: req.session.authenticated,
+	});
+});
+
+app.listen(port, () => {
+	console.log("Node application listening on port " + port);
 });

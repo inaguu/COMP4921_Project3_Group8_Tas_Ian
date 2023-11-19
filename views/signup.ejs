@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi Thread</title>
+    <% if (locals.scripts) { %> 
+        <% for(var i=0; i<scripts.length; i++) { %>
+            <script src="<%= scripts[i]%>"></script>
+        <% } %> 
+    <% } %> 
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+</head>
+<body style="margin: 0px; background-color: #415a77;">
+    
+<div class="container">   
+    <div class="info-box">                   
+        <div class="panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Sign Up</div>
+                <div class="panel-signin"><a id="signinlink" href="/">Sign In</a></div>
+            </div>    
+            <div class="panel-body" style="padding-top:20px" >
+                <form method="post" action="/submituser">
+                    <div style="margin-bottom: 15px" class="input-group">
+                        <input id="login-username" type="username" class="form-control" name="username" placeholder="username"  required pattern=".{3,25}"
+                        title="User name must contain at least 3 characters to a maximum of 25 characters">
+                    </div>
+                    <div style="margin-bottom: 15px" class="input-group">
+                        <input id="login-email" type="email" class="form-control" name="email" placeholder="email"  required pattern=".{,100}"
+                        title="Must contain a valid email">
+                    </div>
+                    <div style="margin-bottom: 15px" class="input-group">
+                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required pattern="(?=.*[\#\+\*\?\^\$\\\.\[\]\{\}\(\)\|\/])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
+                        title="Password must contain at least one number, one symbol, one uppercase and lowercase letter, and at least 10 or more characters">
+                    </div>
+
+                    <div style="margin-top:15px" class="btn">						
+                        <button class="btn-signup" type="submit">Sign Up</button>
+                    </div>
+                </form>
+            </div>                    
+        </div> 
+    </div>
+</div>
+<%- include('templates/footer'); -%>
