@@ -153,6 +153,7 @@ app.post("/loggingin", async (req, res) => {
 app.get("/home", async (req, res) => {
 	res.render("home", {
 		auth: req.session.authenticated,
+		username: req.session.username,
 	});
 });
 
