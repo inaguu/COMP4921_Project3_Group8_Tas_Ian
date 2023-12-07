@@ -10,7 +10,8 @@ const saltRounds = 12;
 const database = include("database_connection");
 const db_utils = include("database/db_utils");
 const db_users = include("database/users");
-const db_events = include("database/events")
+const db_events = include("database/events");
+const db_request = include("database/request");
 // const db_image = include("database/image");
 // const url = include("public/js/url");
 const success = db_utils.printMySQLVersion();
@@ -152,25 +153,27 @@ app.post("/loggingin", async (req, res) => {
 
 //does not require session auth - public
 app.get("/home", async (req, res) => {
-
-	let results = await db_events.getEvents({
-		user_id: req.session.user_id
-	})
-
-	if (results) {
-		res.render("home", {
-			username: req.session.username,
-			events: results
+	if (!isValidSession(req)) {
+		res.redirect("/signup");
+	} else {
+		let results = await db_events.getEvents({
+			user_id: req.session.user_id,
 		});
-	}
 
+		if (results) {
+			res.render("home", {
+				username: req.session.username,
+				events: results,
+			});
+		}
+	}
 });
 
 app.post("/save-event", async (req, res) => {
-	let event_title = req.body.eventTitleInput
-	let event_date = req.body.event_date
-	let event_time = req.body.event_time
-	let user_id = req.session.user_id
+	let event_title = req.body.eventTitleInput;
+	let event_date = req.body.event_date;
+	let event_time = req.body.event_time;
+	let user_id = req.session.user_id;
 
 	const date = new Date();
 
@@ -179,25 +182,58 @@ app.post("/save-event", async (req, res) => {
 	let year = date.getFullYear();
 
 	let curr_date = `${year}-${month}-${day}`;
-	let event_datetime = `${event_date} ${event_time}`
+	let event_datetime = `${event_date} ${event_time}`;
 
 	let result = await db_events.createEvent({
 		title: event_title,
 		event_date: event_datetime,
 		date_created: curr_date,
-		user_id: user_id
-	})
+		user_id: user_id,
+	});
 
 	if (result) {
-		res.redirect("/home")
+		res.redirect("/home");
 	}
-})
+});
 
-app.get("/profile", (req, res) => {
-	res.render("profile", {
-		username: req.session.username
-	})
-})
+app.get("/friend-request", (req, res) => {
+	if (!isValidSession(req)) {
+		res.redirect("/signup");
+	} else {
+		res.render("request", {
+			username: req.session.username,
+		});
+	}
+});
+
+app.post("/add-friend", async (req, res) => {
+	let email = req.body.email;
+
+	let friend_userID = await db_users.getUserID({
+		email: email,
+	});
+
+	if (friend_userID) {
+		console.log("Server: found friend in database: " + friend_userID[0].user_id);
+
+		var results = await db_request.addFriend({
+			senderID: req.session.user_id,
+			receiverID: friend_userID[0].user_id,
+		});
+		
+		res.redirect("/friend-request");
+	} else {
+		console.log("Server: Email does not exist in the database.");
+		res.redirect("/friend-request");
+	}
+
+	// var results = await db_request.addFriend({
+	// 	senderID: req.session.user_id,
+	// 	receiverID: postData.receiverID,
+	// });
+
+	// res.redirect("/friend-request");
+});
 
 app.post("/logout", (req, res) => {
 	req.session.authenticated = false;
@@ -221,8 +257,6 @@ function sessionValidation(req, res, next) {
 		next();
 	}
 }
-
-// app.use("/profile", sessionValidation);
 
 app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));

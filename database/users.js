@@ -51,7 +51,32 @@ async function getUser(postData) {
 	}
 }
 
+async function getUserID(postData) {
+	let getUserIDSQL = `
+		SELECT user_id
+		FROM user
+		WHERE email = :email;
+	`;
+
+	let params = {
+		email: postData.email,
+	};
+
+	try {
+		const results = await database.query(getUserIDSQL, params);
+
+		console.log("Successfully found user");
+		console.log(results[0]);
+		return results[0];
+	} catch (err) {
+		console.log("Error trying to find user");
+		console.log(err);
+		return false;
+	}
+}
+
 module.exports = {
 	createUser,
 	getUser,
+	getUserID
 };
