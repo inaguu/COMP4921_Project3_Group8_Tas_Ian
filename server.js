@@ -152,10 +152,15 @@ app.post("/loggingin", async (req, res) => {
 //does not require session auth - public
 app.get("/home", async (req, res) => {
 	res.render("home", {
-		auth: req.session.authenticated,
 		username: req.session.username,
 	});
 });
+
+app.get("/profile", (req, res) => {
+	res.render("profile", {
+		username: req.session.username
+	})
+})
 
 app.post("/logout", (req, res) => {
 	req.session.authenticated = false;

@@ -21,13 +21,7 @@
 
 <header>
     <div class="navbar">
-
        <img src="/images/sushi_thread.png" alt="logo" class="logo">
-
-
-
-       
-
         <nav>
             <ul>
                 <li>
@@ -39,16 +33,9 @@
                     <button class="btn-logout">My Profile</button>
                 </form></li>
                 <li>
-                    <% if (auth) { %>
-                        <form action='/logout' method='post'>
-                            <button class="btn-logout">Log out</button>
-                        </form>
-                    <% } else { %>
-                        <form action='/signup' method='get'>
-                            <button class="btn-logout">Sign up</button>
-                        </form>
-                    <% } %>
-                    
+                    <form action='/logout' method='post'>
+                        <button class="btn-logout">Log out</button>
+                    </form>
                 </li>
             </ul>
         </nav>
