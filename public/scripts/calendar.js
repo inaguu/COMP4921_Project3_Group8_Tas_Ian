@@ -72,7 +72,7 @@ function load() {
         daySquare.appendChild(eventDiv);
       }
 
-      // daySquare.addEventListener('click', () => openModal(dayString));
+      daySquare.addEventListener('click', () => openModal(dayString));
     } else {
       daySquare.classList.add('padding');
     }
@@ -95,12 +95,12 @@ function saveEvent() {
   if (eventTitleInput.value) {
     eventTitleInput.classList.remove('error');
 
-    // events.push({
-    //   date: clicked,
-    //   title: eventTitleInput.value,
-    // });
+    events.push({
+      date: clicked,
+      title: eventTitleInput.value,
+    });
 
-    // localStorage.setItem('date', clicked);
+    localStorage.setItem('date', clicked);
 
     closeModal();
   } else {
