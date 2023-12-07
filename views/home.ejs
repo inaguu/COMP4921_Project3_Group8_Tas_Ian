@@ -4,7 +4,11 @@
     <h1>Hi, <%= username %>!</h1>
 </div>
 
-<br>
+<div class="option-btns">
+    <div class="upload-btn">
+        <button id="create-event">Create An Event</button>
+    </div>
+</div>
 
 <div id="whole-calendar">
     <div id="container">
@@ -31,10 +35,13 @@
 
     <div id="newEventModal">
         <h2>New Event</h2>
-
-        <input id="eventTitleInput" placeholder="Event Title" />
-
-        <button id="saveButton" class="calendar-button">Save</button>
+        <form action="/save-event" method="POST">
+            <input name="eventTitleInput" id="eventTitleInput" placeholder="Event Title"/>
+            <label for="birthday">Event Date:</label>
+            <input type="date" id="event_date" name="event_date">
+            <input type="time" id="event_time" name="event_time">
+            <button id="saveButton" class="calendar-button">Save</button>
+        </form>
         <button id="cancelButton" class="calendar-button">Cancel</button>
     </div>
 
@@ -43,14 +50,17 @@
 
         <p id="eventText"></p>
 
-        <button id="deleteButton" class="calendar-button">Delete</button>
+        <form action="/delete-event">
+            <button id="deleteButton" class="calendar-button">Delete</button>
+        </form>
         <button id="closeButton" class="calendar-button">Close</button>
     </div>
 
     <div id="modalBackDrop"></div>
 
-    <script src="/scripts/calendar.js"></script>
+    <script src="/scripts/calendar.js">
+        
+    </script>
 </div>
-
 
 <%- include("templates/footer") %>

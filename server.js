@@ -10,6 +10,7 @@ const saltRounds = 12;
 const database = include("database_connection");
 const db_utils = include("database/db_utils");
 const db_users = include("database/users");
+const db_events = include("database/events")
 // const db_image = include("database/image");
 // const url = include("public/js/url");
 const success = db_utils.printMySQLVersion();
@@ -151,10 +152,46 @@ app.post("/loggingin", async (req, res) => {
 
 //does not require session auth - public
 app.get("/home", async (req, res) => {
-	res.render("home", {
-		username: req.session.username,
-	});
+
+	let results = await db_events.getEvents({
+		user_id: req.session.user_id
+	})
+
+	if (results) {
+		res.render("home", {
+			username: req.session.username,
+			events: results
+		});
+	}
+
 });
+
+app.post("/save-event", async (req, res) => {
+	let event_title = req.body.eventTitleInput
+	let event_date = req.body.event_date
+	let event_time = req.body.event_time
+	let user_id = req.session.user_id
+
+	const date = new Date();
+
+	let day = date.getDate();
+	let month = date.getMonth() + 1;
+	let year = date.getFullYear();
+
+	let curr_date = `${year}-${month}-${day}`;
+	let event_datetime = `${event_date} ${event_time}`
+
+	let result = await db_events.createEvent({
+		title: event_title,
+		event_date: event_datetime,
+		date_created: curr_date,
+		user_id: user_id
+	})
+
+	if (result) {
+		res.redirect("/home")
+	}
+})
 
 app.get("/profile", (req, res) => {
 	res.render("profile", {

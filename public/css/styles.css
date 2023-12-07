@@ -472,7 +472,7 @@ input[type=text] {
 /* home.ejs */
 #whole-calendar {
     display: flex;
-    margin-top: 50px;
+    margin-top: 25px;
     justify-content: center;
     background-color: #FFFCFF;
 }
@@ -592,10 +592,12 @@ input[type=text] {
 
 #cancelButton, #deleteButton {
     background-color: #d36c6c;
+    margin-top: 3px;
 }
 
 #saveButton, #closeButton {
     background-color: #92a1d1;
+    margin-top: 3px;
 }
 
 #eventText {

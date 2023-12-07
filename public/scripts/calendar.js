@@ -72,7 +72,7 @@ function load() {
         daySquare.appendChild(eventDiv);
       }
 
-      daySquare.addEventListener('click', () => openModal(dayString));
+      // daySquare.addEventListener('click', () => openModal(dayString));
     } else {
       daySquare.classList.add('padding');
     }
@@ -95,12 +95,13 @@ function saveEvent() {
   if (eventTitleInput.value) {
     eventTitleInput.classList.remove('error');
 
-    events.push({
-      date: clicked,
-      title: eventTitleInput.value,
-    });
+    // events.push({
+    //   date: clicked,
+    //   title: eventTitleInput.value,
+    // });
 
-    localStorage.setItem('events', JSON.stringify(events));
+    // localStorage.setItem('date', clicked);
+
     closeModal();
   } else {
     eventTitleInput.classList.add('error');
@@ -111,6 +112,11 @@ function deleteEvent() {
   events = events.filter(e => e.date !== clicked);
   localStorage.setItem('events', JSON.stringify(events));
   closeModal();
+}
+
+function createEvent() {
+  newEventModal.style.display = 'block'
+  backDrop.style.display = 'block';
 }
 
 function initButtons() {
@@ -128,6 +134,7 @@ function initButtons() {
   document.getElementById('cancelButton').addEventListener('click', closeModal);
   document.getElementById('deleteButton').addEventListener('click', deleteEvent);
   document.getElementById('closeButton').addEventListener('click', closeModal);
+  document.getElementById('create-event').addEventListener('click', createEvent)
 }
 
 initButtons();
