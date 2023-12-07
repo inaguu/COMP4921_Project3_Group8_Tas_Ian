@@ -196,12 +196,20 @@ app.post("/save-event", async (req, res) => {
 	}
 });
 
-app.get("/friend-request", (req, res) => {
+app.get("/friend-request", async (req, res) => {
 	if (!isValidSession(req)) {
 		res.redirect("/signup");
 	} else {
+		let user_id = req.session.user_id;
+		let outgoing = await db_request.getOutgoingReq({
+			userID: req.session.user_id,
+		});
+		console.log(user_id);
+		console.log(outgoing);
+
 		res.render("request", {
 			username: req.session.username,
+			outgoing: outgoing,
 		});
 	}
 });
@@ -214,13 +222,15 @@ app.post("/add-friend", async (req, res) => {
 	});
 
 	if (friend_userID) {
-		console.log("Server: found friend in database: " + friend_userID[0].user_id);
+		console.log(
+			"Server: found friend in database: " + friend_userID[0].user_id
+		);
 
 		var results = await db_request.addFriend({
 			senderID: req.session.user_id,
 			receiverID: friend_userID[0].user_id,
 		});
-		
+
 		res.redirect("/friend-request");
 	} else {
 		console.log("Server: Email does not exist in the database.");
