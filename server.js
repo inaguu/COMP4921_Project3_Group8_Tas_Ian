@@ -74,37 +74,32 @@ app.post("/submituser", async (req, res) => {
 
 	var hashedPassword = bcrypt.hashSync(password, saltRounds);
 
-	let success = await db_tables.create_user_table();
+	let success = await db_users.createUser({
+		username: username,
+		email: email,
+		hashedPassword: hashedPassword,
+	});
+	console.log(username);
+	console.log(email);
+	console.log(hashedPassword);
+
 	if (success) {
-		success = await db_users.createUser({
-			username: username,
+		var results = await db_users.getUser({
 			email: email,
-			hashedPassword: hashedPassword,
+			hashedPassword: password,
 		});
-		console.log(username);
-		console.log(email);
-		console.log(hashedPassword);
+		req.session.authenticated = true;
+		req.session.username = results[0].username;
+		req.session.user_id = results[0].user_id;
+		req.session.cookie.maxAge = expireTime;
+		console.log(results[0].user_id);
 
-		if (success) {
-			var results = await db_users.getUser({
-				email: email,
-				hashedPassword: password,
-			});
-			req.session.authenticated = true;
-			req.session.username = results[0].username;
-			req.session.user_id = results[0].user_id;
-			req.session.cookie.maxAge = expireTime;
-			console.log(results[0].user_id);
-
-			res.redirect("/home");
-		} else {
-			// res.render("errorMessage", {
-			// 	error: "Failed to create user.",
-			// });
-			console.log("error in creating the user");
-		}
+		res.redirect("/home");
 	} else {
-		console.log("Server: Error creating tables in database.");
+		// res.render("errorMessage", {
+		// 	error: "Failed to create user.",
+		// });
+		console.log("error in creating the user");
 	}
 });
 
